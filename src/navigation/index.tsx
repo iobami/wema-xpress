@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import Entry from '../pages';
 import SignIn from '../pages/sign-in';
 import SignUp from '../pages/sign-up';
+import Dashboard from '../pages/dashboard';
 
 export const routes = {
   entry: {
@@ -13,6 +14,15 @@ export const routes = {
   signUp: {
     path: '/sign-up'
   },
+  dashboard: {
+    path: '/dashboard',
+    deals: {
+      path: '/dashboard/deals'
+    },
+    transactions: {
+      path: '/dashboard/transactions'
+    },
+  }
 };
 
 export const router = createBrowserRouter([
@@ -27,5 +37,9 @@ export const router = createBrowserRouter([
   {
     path: routes.signUp.path,
     element: <SignUp />,
+  },
+  {
+    path: routes.dashboard.path,
+    element: <Dashboard />,
   },
 ]);

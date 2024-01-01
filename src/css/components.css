@@ -1003,6 +1003,15 @@ ul.app__pagination li.disabled {
   color: rgba(20, 20, 43, 0.8);
 }
 
+.app__checkbox__con {
+  margin-right: 0 !important;
+}
+
+.app__checkbox__con input {
+  width: 12px !important;
+  height: 12px !important;
+}
+
 /* ===================================
    INPUT COMPONENT ENDS HERE
 ====================================== */

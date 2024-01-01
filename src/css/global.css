@@ -28,6 +28,7 @@ body {
   height: 100%;
 
   font-family: 'Inter', sans-serif;
+  background-color: #F5F6F8;
 }
 
 #__next {
@@ -287,6 +288,177 @@ h6 {
 
 /* ===================================
     REPORT MODAL ENDS HERE
+====================================== */
+
+/* ===================================
+    DASHBOARD STARTS HERE
+====================================== */
+.wema__dashboard__layout {
+  position: relative;
+}
+
+.wema__dashboard__sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 256px;
+  bottom: 0;
+  background-color: #fff;
+  padding: 40px 24px;
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.06);
+  z-index: 99;
+}
+
+.wema__dashboard__sidebar__divider {
+  height: 1px;
+  width: 100%;
+  opacity: 0.2;
+  background: #F5F6F8;
+  margin-top: 18px;
+  margin-bottom: 16px;
+}
+
+.wema__dashboard__layout__main__content {
+  margin-left: 256px;
+  margin-top: 88px;
+  padding: 32px;
+}
+
+.wema__dashboard__sidebar__link {
+  display: block;
+  padding: 14px 20px;
+  border-radius: 8px;
+  position: relative;
+  text-decoration: none;
+}
+
+.wema__dashboard__sidebar__link p{
+  color: #1A1619;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.wema__dashboard__sidebar__link path {
+  fill: #1A1619;
+}
+
+.wema__dashboard__sidebar__link.active p{
+  color: #039BF0;
+}
+
+.wema__dashboard__sidebar__link.active path{
+  fill: #039BF0;
+}
+
+.wema__dashboard__sidebar__link .indicator {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  background-color: #F2FAFF;
+  z-index: -1;
+  border-radius: 8px;
+  border-left: 3px solid #039BF0;
+}
+
+.wema__dashboard__header {
+  position: fixed;
+  top: 0;
+  left: 256px;
+  right: 0;
+  background-color: #fff;
+  z-index: 9;
+  padding: 22px 32px;
+}
+
+.wema__dashboard__header__page__title h3{
+  color: #1A1619;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.wema__dashboard__header__page__title p{
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 137.988%; 
+  font-family: Helvetica, sans-serif;
+  color: #039BF0;
+  padding: 8px;
+  border-radius: 24px;
+  background: #F2FAFF;
+}
+
+.wema__dashboard__header__profile__pic {
+  width: 44px;
+  height: 44px;
+}
+
+.wema__dashboard__header__profile__pic img {
+  width: 100%;
+  height: 100%;
+}
+
+.wema__dshboard__table table{
+  background-color: #fff;
+}
+
+.wema__dshboard__table th {
+  color: #1A1619;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border-bottom-width: 0;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.wema__dshboard__table th:first-child {
+  padding-left: 24px;
+}
+
+.wema__dshboard__table th:last-child {
+  padding-left: 24px;
+}
+
+.wema__dshboard__table td {
+  color: #1A1619;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.wema__dshboard__table td:first-child {
+  padding-left: 24px;
+}
+
+.wema__dshboard__table td:last-child {
+  padding-left: 24px;
+}
+
+.wema__dshboard__table tr {
+  border-bottom: 1px solid #EBEFF2;
+}
+
+.form-check-input:checked[type='checkbox'] {
+  background-size: 11px !important;
+}
+
+.form-check-input {
+  margin-top: 0;
+}
+
+/* ===================================
+    DASHBOARD ENDS HERE
 ====================================== */
 
 .app_card_shimmer_con {
