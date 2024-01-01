@@ -1,0 +1,312 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* --max-width: 1440px; */
+  --max-width: 1360px;
+  --light-gray: #1A1619;
+  --dark-gray: #4a4a4a;
+  --gray-3: #828282;
+  --stock-breakdown-bg: rgba(255, 255, 255, 0.1);
+  --notification-text: 'rgba(250, 96, 9, 0.9)';
+
+  --main-bg: #F5F6F8;
+  --brand: #039BF0;
+  --btn-lgt: #FFF;
+}
+
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+
+  font-family: 'Inter', sans-serif;
+}
+
+#__next {
+  width: 100%;
+  /* height: 100%; */
+  background: var(--main-bg);
+}
+
+.scrollbar {
+  overflow-y: auto;
+}
+
+.scrollbar.horizontal {
+  overflow-x: auto;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #d3d3d3;
+  height: 10px;
+  border-radius: 4px;
+  border-bottom-right-radius: 0;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #a9a9a9;
+  cursor: pointer;
+  transition: 0.15s ease-in-out;
+  transition-delay: 0.15s;
+}
+
+.text__underline__none {
+  text-decoration: none;
+}
+
+.app__auth {
+  height: fit-content;
+  min-height: 100vh;
+  padding: 34px 0;
+  background: var(--main-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.app__auth__p {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 24px;
+  text-align: center;
+  color: var(--main-text2);
+}
+
+.app__auth__form_container {
+  width: 522px;
+  /* height: 492px; */
+  background: #ffffff;
+  box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.01);
+  border-radius: 8px;
+  padding: 40px;
+}
+
+.app__auth__form_container__header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+
+.app__auth__form_container__h4 {
+  font-weight: 500;
+  line-height: normal;
+  font-style: normal;
+  font-size: 24px;
+  color: var(--brand);
+}
+
+.app__auth__form_container__p {
+  color: #606060;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.app__auth__form_container__input {
+  margin-bottom: 25px !important;
+}
+
+.app__auth__form_container__anchor_right {
+  color: var(--main-text2);
+  text-decoration: none;
+  margin-bottom: 25px !important;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.app__auth__form_container__anchor_right:hover {
+  color: var(--main-text2);
+  opacity: 0.9;
+  text-decoration: underline;
+  transition: 0.1s ease-in-out;
+}
+
+.app__main {
+  padding-top: 136px;
+}
+
+.app__main__container {
+  margin: auto;
+  max-width: var(--max-width);
+  min-height: calc(100vh - 136px);
+}
+
+.app__login_form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.app__login_form__password {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.app__login_form__password__fgt {
+  color: #606060;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  display: flex;
+  gap: 8px;
+}
+
+.app__login_form__password__fgt span {
+  color: var(--brand);
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0;
+}
+
+.remove__btn__style {
+  all: unset;
+  cursor: pointer;
+}
+
+.modal-content {
+  align-items: center;
+  background-color: transparent;
+  border: none;
+}
+
+/* ===================================
+    REPORT MODAL STARTS HERE
+====================================== */
+.report__modal__con .modal-content {
+  max-width: 697px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.app_reports_modal {
+  max-width: 697px;
+  width: 100%;
+}
+
+.app_reports_close_btn {
+  all: unset;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #3447f4;
+}
+
+.app_reports_modal_header h4 {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 44px;
+  color: #000000;
+}
+
+.app_reports_modal_header p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  color: #808080;
+}
+
+.app_reports_modal_header .info {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: rgba(20, 20, 43, 0.8);
+}
+
+.app_report_modal_input input {
+  height: 47px;
+}
+
+.system_config__input {
+  text-align: center;
+  max-width: 50px;
+  margin-left: 12px;
+  padding: 0;
+  border: none;
+}
+
+.system_config__input:active,
+.system_config__input:focus,
+.system_config__input:hover {
+  padding: 0;
+  border: none;
+  box-shadow: none;
+}
+
+.app_reports_modal_action_btn {
+  height: 46px;
+  width: 162px !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  line-height: 24px !important;
+  border-radius: 4px !important;
+}
+
+.app__drawer__text {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: rgba(20, 20, 43, 0.8);
+}
+
+/* ===================================
+    REPORT MODAL ENDS HERE
+====================================== */
+
+.app_card_shimmer_con {
+  height: 130px;
+  animation: shimmer 3s;
+  animation-iteration-count: infinite;
+  background: linear-gradient(to right, #fff 5%, #ddd 25%, #fff 35%);
+  background-size: 2000px 100%;
+  border-radius: 8px;
+}
+
+.shimmer_no_padding {
+  padding: 0 !important;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -2000px 0;
+  }
+  to {
+    background-position: 2000px 0;
+  }
+}

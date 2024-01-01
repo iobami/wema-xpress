@@ -1,0 +1,212 @@
+@media (max-width: 1440.98px) {
+  :root {
+    --max-width: 92%;
+  }
+}
+
+@media (max-width: 1299.98px) {
+  .app__document__archiver--header .row {
+    grid-column-gap: 0rem;
+    grid-row-gap: 3rem;
+  }
+
+  .app__archiver__arrow .line {
+    height: 87px;
+  }
+}
+
+@media (min-width: 1200px) {
+}
+
+/* col-xl */
+@media (max-width: 1199.98px) {
+}
+
+/* col-lg */
+@media (max-width: 991.98px) {
+  .app__document__catalog__header .title {
+    width: unset;
+  }
+
+  .app__main {
+    padding-top: 80px;
+  }
+
+  .app__main__container {
+    min-height: calc(100vh - 80px);
+  }
+
+  .app_header__logo,
+  .app_header__profile {
+    min-width: auto;
+  }
+
+  .app_navbar.mobile {
+    display: block !important;
+  }
+
+  .notifications_popover.profile .popover-arrow {
+    left: -8px !important;
+  }
+
+  .app__document__archiver__movement--body .flex-one {
+    width: 100%;
+  }
+
+  .app__document__archiver__movement--body .flex-two {
+    width: 100%;
+  }
+
+  .app__document__archiver--body .flex-one {
+    width: 100%;
+  }
+
+  .app__document__archiver--body .flex-two {
+    width: 100%;
+  }
+
+  .app__document__archiver--header .row {
+    grid-column-gap: 0rem;
+    /* grid-row-gap: 3rem; */
+  }
+}
+
+@media (max-width: 867.98px) {
+}
+
+@media (min-width: 767.98px) {
+}
+
+/* col-md */
+@media (max-width: 767.98px) {
+  body {
+    font-size: 14px;
+  }
+
+  .app__document__catalog__sidebar .link a {
+    font-size: 10px;
+  }
+
+  .app_header__logo__img {
+    width: 94px;
+  }
+
+  .app_navbar.mobile {
+    min-height: calc(100vh - 127px);
+    height: calc(100% - 127px);
+  }
+
+  /* .app__stock__card__con {
+    max-width: 180px;
+  }
+
+  .app__breakdown__card {
+    padding: 2rem 1rem;
+  } */
+}
+
+@media (max-width: 662px) {
+  :root {
+    --app_drawer__padding: 24px 32px;
+  }
+}
+
+/* col-sm */
+@media (max-width: 575.98px) {
+  :root {
+    --app_drawer__padding: 18px;
+  }
+
+  .app__document__mobile__item h4 {
+    font-size: 10px;
+  }
+
+  .app__document__mobile__item p.main {
+    font-size: 12px;
+  }
+
+  .app__auth__form_container {
+    width: 85%;
+    padding: 32px;
+  }
+
+  .app__auth__logo {
+    height: 64px;
+  }
+
+  .app_drawer__header__title {
+    font-size: 18px;
+  }
+
+  .app_drawer__header__description,
+  .app_drawer__header__btn {
+    font-size: 14px;
+  }
+
+  .app__stock__card__con {
+    max-width: 180px;
+  }
+
+  .app__breakdown__card {
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 450.98px) {
+  .app__branch__grid__con {
+    row-gap: 2px;
+    column-gap: 16px;
+  }
+
+  .app__auth__form_container {
+    width: 91%;
+    padding: 22px;
+  }
+
+  .app__archiver__reports--title h4 {
+    font-size: 1rem;
+  }
+
+  .app__back__btn p {
+    font-size: 0.75rem;
+  }
+
+  .app__archiver__reports--card {
+    width: 100%;
+  }
+
+  .app__document__archiver__movement__flex-con-body .reference {
+    width: 70%;
+  }
+
+  .app__document__archiver__movement .filter {
+    width: 100%;
+  }
+
+  .app__archiver__arrow .line {
+    height: 70px;
+  }
+
+  .app_drawer__footer button {
+    min-width: calc(50% - 4px);
+  }
+
+  .app_drawer__footer button:first-child {
+    margin-right: 4px;
+  }
+
+  .app_drawer__footer button:last-child {
+    margin-left: 4px;
+  }
+
+  .app__stock__card__con {
+    max-width: 160px;
+  }
+
+  .app__breakdown__card {
+    padding: 2rem 0.85rem;
+  }
+}
+
+@media (max-width: 299.98px) {
+}
