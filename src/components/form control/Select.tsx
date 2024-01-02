@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface IProps extends React.HTMLProps<HTMLSelectElement> {
   disabledValue?: string;
@@ -13,7 +13,7 @@ interface IProps extends React.HTMLProps<HTMLSelectElement> {
 const Select = (props: IProps) => {
   const {
     label,
-    name = '',
+    name = "",
     value,
     onBlur,
     onChange,
@@ -21,7 +21,7 @@ const Select = (props: IProps) => {
     className,
     errors = {},
     options,
-    altOptionLabel = '',
+    altOptionLabel = "",
     optionLabel,
     optionValue,
     style,
@@ -33,7 +33,11 @@ const Select = (props: IProps) => {
   const hasError = (errors[name] && touched[name]) || false;
 
   return (
-    <div className={`app__form__field my-2 ${hasError ? 'has_error' : ''} ${className || ''}`}>
+    <div
+      className={`app__form__field ${hasError ? "has_error" : ""} ${
+        className || ""
+      }`}
+    >
       {!!label && (
         <div className="label mb-2">
           <label htmlFor={id}>{label}</label>
@@ -51,16 +55,18 @@ const Select = (props: IProps) => {
       >
         {!!disabledValue && (
           <option disabled value="">
-            {disabledValue || 'Choose...'}
+            {disabledValue || "Choose..."}
           </option>
         )}
 
-        {options
-          && options.map((item: any, index: number) => {
+        {options &&
+          options.map((item: any, index: number) => {
             const setValue = optionValue ? item[optionValue] : item;
-            let setLabel = optionLabel ? item[optionLabel] || item[altOptionLabel] : item;
+            let setLabel = optionLabel
+              ? item[optionLabel] || item[altOptionLabel]
+              : item;
 
-            if (typeof setLabel === 'object') {
+            if (typeof setLabel === "object") {
               setLabel = JSON.stringify(item);
             } else if (Array.isArray && Array.isArray(setLabel)) {
               setLabel = JSON.stringify(item);

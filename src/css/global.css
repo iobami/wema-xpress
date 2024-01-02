@@ -7,15 +7,15 @@
 :root {
   /* --max-width: 1440px; */
   --max-width: 1360px;
-  --light-gray: #1A1619;
+  --light-gray: #1a1619;
   --dark-gray: #4a4a4a;
   --gray-3: #828282;
   --stock-breakdown-bg: rgba(255, 255, 255, 0.1);
-  --notification-text: 'rgba(250, 96, 9, 0.9)';
+  --notification-text: "rgba(250, 96, 9, 0.9)";
 
-  --main-bg: #F5F6F8;
-  --brand: #039BF0;
-  --btn-lgt: #FFF;
+  --main-bg: #f5f6f8;
+  --brand: #039bf0;
+  --btn-lgt: #fff;
 }
 
 html {
@@ -27,8 +27,8 @@ body {
   width: 100%;
   height: 100%;
 
-  font-family: 'Inter', sans-serif;
-  background-color: #F5F6F8;
+  font-family: "Inter", sans-serif;
+  background-color: #f5f6f8;
 }
 
 #__next {
@@ -84,10 +84,11 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top: 100px;
 }
 
 .app__auth__p {
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
@@ -286,6 +287,103 @@ h6 {
   color: rgba(20, 20, 43, 0.8);
 }
 
+.app__auth__header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-top: 48px;
+  padding-bottom: 16px;
+  z-index: 9;
+  background-color: var(--main-bg);
+}
+
+.app__auth__sign__in__btn {
+  color: #039bf0 !important;
+  font-size: 14px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: normal !important;
+  padding: 8px 16px !important;
+  height: unset;
+  border-radius: 4px !important;
+  border: 1px solid #039bf0 !important;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+.app__auth__header__text {
+  color: #606060;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.app__auth__form__divider {
+  height: 1px;
+  width: 100%;
+  background-color: #f5f6f8;
+  margin-bottom: 24px;
+}
+
+.app__auth_subtitle {
+  color: #039bf0;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.app__auth__select {
+  height: 48px;
+}
+
+.app__auth__attach_btn {
+  height: unset;
+  padding: 4px 12px !important;
+  border-radius: 4px;
+}
+
+.app__auth__file__drop__text {
+  color: #1a141f;
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 148%;
+}
+
+.app__auth__file__drop__text.lg {
+  font-size: 14px;
+}
+
+.app__auth__file__drop {
+  border: 1px dashed #aba7af;
+  border-radius: 4px;
+  padding: 24px;
+}
+
+.file-drop
+  > .file-drop-target.file-drop-dragging-over-frame
+  .app__auth__file__drop {
+  border-color: var(--brand);
+}
+
+.app__auth__sign__uo__btn button {
+  padding: 0 65px !important;
+}
+
+.app__auth__sign__uo__btn p {
+  color: #808080;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
 /* ===================================
     REPORT MODAL ENDS HERE
 ====================================== */
@@ -313,7 +411,7 @@ h6 {
   height: 1px;
   width: 100%;
   opacity: 0.2;
-  background: #F5F6F8;
+  background: #f5f6f8;
   margin-top: 18px;
   margin-bottom: 16px;
 }
@@ -332,8 +430,8 @@ h6 {
   text-decoration: none;
 }
 
-.wema__dashboard__sidebar__link p{
-  color: #1A1619;
+.wema__dashboard__sidebar__link p {
+  color: #1a1619;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -341,15 +439,19 @@ h6 {
 }
 
 .wema__dashboard__sidebar__link path {
-  fill: #1A1619;
+  fill: #1a1619;
 }
 
-.wema__dashboard__sidebar__link.active p{
-  color: #039BF0;
+.wema__dashboard__sidebar__link.active {
+  background-color: #f2faff;
 }
 
-.wema__dashboard__sidebar__link.active path{
-  fill: #039BF0;
+.wema__dashboard__sidebar__link.active p {
+  color: #039bf0;
+}
+
+.wema__dashboard__sidebar__link.active path {
+  fill: #039bf0;
 }
 
 .wema__dashboard__sidebar__link .indicator {
@@ -358,10 +460,10 @@ h6 {
   bottom: 0;
   right: 0;
   top: 0;
-  background-color: #F2FAFF;
-  z-index: -1;
-  border-radius: 8px;
-  border-left: 3px solid #039BF0;
+  z-index: 0;
+  border-radius: 8px 0 0 8px;
+  background-color: #039bf0;
+  max-width: 4px;
 }
 
 .wema__dashboard__header {
@@ -374,24 +476,24 @@ h6 {
   padding: 22px 32px;
 }
 
-.wema__dashboard__header__page__title h3{
-  color: #1A1619;
+.wema__dashboard__header__page__title h3 {
+  color: #1a1619;
   font-size: 24px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
 }
 
-.wema__dashboard__header__page__title p{
+.wema__dashboard__header__page__title p {
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
-  line-height: 137.988%; 
+  line-height: 137.988%;
   font-family: Helvetica, sans-serif;
-  color: #039BF0;
+  color: #039bf0;
   padding: 8px;
   border-radius: 24px;
-  background: #F2FAFF;
+  background: #f2faff;
 }
 
 .wema__dashboard__header__profile__pic {
@@ -404,12 +506,58 @@ h6 {
   height: 100%;
 }
 
-.wema__dshboard__table table{
+.wema__dshboard__filters {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.wema__dshboard__filters__select {
+  min-width: 212px;
+  max-width: 212px;
+}
+
+.wema__dshboard__filters__select select {
+  height: 48px;
+}
+
+.wema__dshboard__filters__input {
+  min-width: 240px;
+  max-width: 240px;
+}
+
+.wema__dshboard__filters__input input:focus {
+  border-width: 1px;
+}
+
+.wema__dshboard__filters__input input {
+  padding: 0.375rem 0.75rem 0.375rem 2.15rem;
+  /* -moz-padding-start: calc(0.75rem - 3px); */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M16.436 15.0849L20.376 19.0949C20.5525 19.2857 20.6478 19.5377 20.6417 19.7975C20.6356 20.0573 20.5286 20.3046 20.3433 20.4869C20.158 20.6691 19.9091 20.7721 19.6492 20.774C19.3893 20.7759 19.1389 20.6765 18.951 20.4969L15.013 16.4909C13.4935 17.6356 11.5959 18.16 9.70428 17.9581C7.81266 17.7562 6.06845 16.8431 4.82482 15.4035C3.58118 13.9639 2.93106 12.1056 3.00608 10.2047C3.08111 8.30382 3.87568 6.50248 5.22891 5.16542C6.58214 3.82836 8.3929 3.05549 10.2945 3.00331C12.1962 2.95114 14.0466 3.62355 15.4711 4.88439C16.8956 6.14524 17.7878 7.9003 17.9669 9.7942C18.1461 11.6881 17.5988 13.5793 16.436 15.0849ZM10.5 15.9999C11.9587 15.9999 13.3576 15.4204 14.3891 14.389C15.4205 13.3575 16 11.9586 16 10.4999C16 9.04122 15.4205 7.64227 14.3891 6.61082C13.3576 5.57937 11.9587 4.99991 10.5 4.99991C9.04131 4.99991 7.64236 5.57937 6.61091 6.61082C5.57946 7.64227 5 9.04122 5 10.4999C5 11.9586 5.57946 13.3575 6.61091 14.389C7.64236 15.4204 9.04131 15.9999 10.5 15.9999Z' fill='%23808080'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 0.75rem center;
+  background-size: 20px 20px;
+  appearance: none;
+}
+
+.wema__dshboard__filters__right {
+  display: flex;
+  gap: 16px;
+}
+
+.wema__dshboard__filters .app__submit__button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+}
+
+.wema__dshboard__table table {
   background-color: #fff;
 }
 
 .wema__dshboard__table th {
-  color: #1A1619;
+  color: #1a1619;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -428,7 +576,7 @@ h6 {
 }
 
 .wema__dshboard__table td {
-  color: #1A1619;
+  color: #1a1619;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -446,15 +594,47 @@ h6 {
 }
 
 .wema__dshboard__table tr {
-  border-bottom: 1px solid #EBEFF2;
+  border-bottom: 1px solid #ebeff2;
 }
 
-.form-check-input:checked[type='checkbox'] {
+.wema__dshboard__table__pagination {
+  background-color: #fff;
+  padding: 24px;
+}
+
+.form-check-input:checked[type="checkbox"] {
   background-size: 11px !important;
 }
 
 .form-check-input {
   margin-top: 0;
+}
+
+.app__badge {
+  border-radius: 8px;
+  background: transparent;
+  color: #000;
+
+  display: inline-flex;
+  padding: 4px 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.app__badge--active {
+  background: rgba(39, 167, 19, 0.1);
+  color: #27a713;
+}
+
+.app__badge--pending {
+  background: rgba(255, 153, 0, 0.1);
+  color: #f90;
+}
+
+.app__badge--deactivated {
+  background: rgba(255, 0, 0, 0.1);
+  color: #f00;
 }
 
 /* ===================================

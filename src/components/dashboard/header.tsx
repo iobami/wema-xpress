@@ -1,15 +1,16 @@
 import React from "react";
 import { Alert, ChevronDown } from "../svg";
-import ProfilePicture from '../../images/profile-picture.png'
+import ProfilePicture from "../../images/profile-picture.png";
+
+import stub from "../../stub.json";
 
 export default function Header() {
-
   return (
     <div className="wema__dashboard__header">
       <div className="d-flex align-items-center justify-content-between">
         <div className="d-flex gap-2 align-items-center wema__dashboard__header__page__title">
           <h3 className="font-inter">Verifier</h3>
-          <p className="">11</p>
+          <p className="">{stub.length}</p>
         </div>
 
         <div className="d-flex gap-4 align-items-center">
@@ -24,5 +25,5 @@ export default function Header() {
         </div>
       </div>
     </div>
-  )
+  );
 }

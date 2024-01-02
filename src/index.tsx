@@ -1,27 +1,42 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import {
-  RouterProvider,
-} from 'react-router-dom';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
-import './css/bootstrap.min.css';
-import './css/fonts.css';
-import './css/components.css';
-import './css/typography.css';
-import './css/global.css';
-import './css/utils.css';
-import './css/responsive.css';
+import "react-toastify/dist/ReactToastify.css";
+import "./css/bootstrap.min.css";
+import "./css/fonts.css";
+import "./css/components.css";
+import "./css/typography.css";
+import "./css/global.css";
+import "./css/utils.css";
+import "./css/responsive.css";
 
-import reportWebVitals from './reportWebVitals';
-import { router } from './navigation';
+import reportWebVitals from "./reportWebVitals";
+import { router } from "./navigation";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+    mutations: {
+      retry: false,
+    },
+  },
+});
 
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <ToastContainer />
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
