@@ -122,6 +122,14 @@ export default function Page() {
 
   const slicedData = paginate(data, Number(query.pageSize), Number(query.pageNumber));
 
+  const handlePage = (page: number) => {
+    setSearchParams((params) => {
+      params.set(SearchParams.pageNumber, String(page));
+
+      return params;
+    });
+  };
+
   return (
     <DashboardLayout>
       <div className="wema__dshboard__filters">
@@ -135,7 +143,7 @@ export default function Page() {
               params.set(SearchParams.status, (e.target as any).value || '');
 
               return params;
-            })
+            });
           }}
           value={query.status || ''}
         />
@@ -232,8 +240,19 @@ export default function Page() {
             <button className="btn btn-sm btn-light disabled">Previous</button>
 
             <div className="wema__dshboard__table__pagination__ctrl__nos">
-              <button className="btn btn-sm btn-light active">1</button>
-              <button className="btn btn-sm btn-light">2</button>
+              <button 
+                className={`btn btn-sm btn-light ${String(query.pageNumber) === '1' ? 'active' : ''}`} 
+                onClick={() => handlePage(1)}
+              >
+                1
+              </button>
+
+              <button 
+                className={`btn btn-sm btn-light ${String(query.pageNumber) === '2' ? 'active' : ''}`} 
+                onClick={() => handlePage(2)}
+              >
+                2
+              </button>
             </div>
 
             <button className="btn btn-sm btn-light">Next</button>
