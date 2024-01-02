@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
+import { ReactSession } from 'react-client-session';
 
 import config from '../../../config';
 import api from '../../api';
@@ -75,6 +76,8 @@ const useLogin = (options = {}) => {
     });
 
     await promise;
+
+    ReactSession.set('email', args.body?.email);
 
     return api.post(args)
   }, {
