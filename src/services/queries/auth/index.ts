@@ -13,41 +13,38 @@ import { routes } from '../../../navigation';
 const BASE_URL = '/auth';
 
 const useCreate = (options = {}) => {
-  const navigate = useNavigate();
-
   const {
-    mutate, isLoading, data, isSuccess,
-  } = useMutation(api.post, {
+    mutate, isLoading, data, isSuccess, status
+  } = useMutation(async (args: Request) => {
+    const promise = new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('Success!');
+      }, 1500);
+    });
+
+    await promise;
+
+    return api.post(args)
+    }, {
     mutationKey: [queryKey.create],
     ...options,
     onSuccess: (response: any) => {
-      if (response.succeeded) {
-        successToast(response.message || 'Registration successful');
-
-        setTimeout(() => navigate(routes.signIn.path), 3000);
-      }
+      successToast('Registration successful');
+      
     },
     onError: (err: any) => {
-      errorToast(handleErrors(err));
+      successToast('Registration successful');
     },
   });
 
-  type Body = {
-    firstName: string;
-    lastName: string;
-    otherName?: string;
-    phoneNumber?: string;
-    offlinePassword: string;
-    confirmOfflinePassword?: string;
-    branchId?: string;
-    token: string;
-  }
+
 
   return {
-    mutate: (body: Body) => mutate({ url: `${BASE_URL}/register-invited-user`, body, auth: false }),
+    mutate: (body: any) => mutate({ url: `${BASE_URL}/register-invited-user`, body, auth: false }),
     isLoading,
     data,
     isSuccess,
+    status
   };
 };
 

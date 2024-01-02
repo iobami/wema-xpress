@@ -7,8 +7,9 @@ import {
 } from "../../components/form control";
 import queries from "../../services/queries/verifiers";
 import { useSearchParams } from "react-router-dom";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import config from "../../config";
+import { VerifiersResponse } from "../../services/queries/verifiers/types";
 
 function paginate(array: any[], page_size = 10, page_number = 1) {
   return array.slice((page_number - 1) * page_size, page_number * page_size);
@@ -118,9 +119,13 @@ export default function Page() {
 
   const query = useSearchQueries();
 
+  const [selectedItems, setSelectedItems] = useState([] as number[]);
+
   const { data, isLoading } = queries.read({ query });
 
-  const slicedData = paginate(data, Number(query.pageSize), Number(query.pageNumber));
+  const slicedData = paginate(data, Number(query.pageSize), Number(query.pageNumber)) as VerifiersResponse['data'];
+
+  const allItemsSelected = !!selectedItems.length && selectedItems.length === slicedData?.length;
 
   const handlePage = (page: number) => {
     setSearchParams((params) => {
@@ -174,7 +179,16 @@ export default function Page() {
           <thead>
             <tr>
               <th className="align-middle">
-                <Checkbox checked={false} onChange={() => {}} />
+                <Checkbox 
+                  checked={allItemsSelected} 
+                  onChange={() => {
+                    if (allItemsSelected) {
+                      setSelectedItems([]);
+                    } else {
+                      setSelectedItems(slicedData.map((item) => item.id));
+                    }
+                  }}
+                />
               </th>
               <th className="align-middle font-inter">First Name</th>
               <th className="align-middle font-inter">Last Name</th>
@@ -190,7 +204,18 @@ export default function Page() {
             {slicedData?.map((item) => (
               <tr key={item.id}>
                 <td className="align-middle">
-                  <Checkbox checked={false} onChange={() => {}} />
+                  <Checkbox 
+                    checked={selectedItems.includes(item.id)} 
+                    onChange={() => {
+                      if (selectedItems.includes(item.id)) {
+                        setSelectedItems((prev) => prev.filter((id) => id !== item.id));
+                      } else {
+                        setSelectedItems((prev) => {
+                          return [...prev, item.id];
+                        });
+                      }
+                    }} 
+                  />
                 </td>
                 <td className="align-middle font-inter">{item.first_name}</td>
                 <td className="align-middle font-inter">{item.last_name}</td>

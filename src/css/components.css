@@ -981,6 +981,20 @@ ul.app__pagination li.disabled {
   box-shadow: none;
 }
 
+.app__form__field .eye-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  bottom: 0;
+  margin: auto;
+  transform: translateY(-50%);
+}
+
+.app__form__field .eye-icon svg {
+  height: 20px;
+  width: 20px;
+}
+
 .form-check-input {
   border-color: var(--dark-gray);
 }

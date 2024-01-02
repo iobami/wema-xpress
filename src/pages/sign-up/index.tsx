@@ -4,9 +4,10 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { FileDrop } from "react-file-drop";
 import { useRef, useState } from "react";
-import { RenderIf } from "../../components";
+import { PendingModal, RenderIf } from "../../components";
 import { Attach, Cloud } from "../../components/svg";
 import { toast } from "react-toastify";
+import queries from "../../services/queries/auth";
 
 const validationSchema = Yup.object().shape({
   business_name: Yup.string().required("Please enter business name"),
@@ -68,6 +69,8 @@ export default function Page() {
   const [firstPageActive, setFirstPageActive] = useState(true);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
+  const { mutate, isLoading, status } = queries.create()
+
   const onFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
     if (files === null) return;
@@ -85,340 +88,288 @@ export default function Page() {
   };
 
   const onSubmit = (_values: InitialValues) => {
-    console.log(_values);
     setFirstPageActive(false);
+    window.scrollTo(0, 0)
   };
 
   const onSubmit2 = (_values: InitialValues2) => {
-    console.log(_values);
+    mutate(_values)
   };
 
   return (
     <AuthLayout>
-      <div className="app__auth__form_container">
-        <div className="app__auth__form_container__header">
-          <h4 className="app__auth__form_container__h4">
-            Welcome to Xpress Rewards
-          </h4>
+      <RenderIf condition={status === 'idle' || status === 'loading'}>
+        <div className="app__auth__form_container">
+          <div className="app__auth__form_container__header">
+            <h4 className="app__auth__form_container__h4">
+              Welcome to Xpress Rewards
+            </h4>
 
-          <p className="app__auth__form_container__p">
-            Complete the form below to get started
-          </p>
-        </div>
+            <p className="app__auth__form_container__p">
+              Complete the form below to get started
+            </p>
+          </div>
 
-        <div className="app__auth__form__divider"></div>
+          <div className="app__auth__form__divider"></div>
 
-        <RenderIf condition={firstPageActive}>
-          <p className="app__auth_subtitle font-inter mb-3">
-            Business Information
-          </p>
+          <RenderIf condition={firstPageActive}>
+            <p className="app__auth_subtitle font-inter mb-3">
+              Business Information
+            </p>
 
-          <div>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              onSubmit={onSubmit}
-            >
-              {(props) => {
-                const {
-                  values,
-                  handleChange,
-                  handleBlur,
-                  handleSubmit,
-                  errors,
-                  touched,
-                } = props;
-                return (
-                  <form
-                    className="app__login_form gap-3"
-                    onSubmit={handleSubmit}
-                  >
-                    <InputField
-                      name="business_name"
-                      type="text"
-                      id="business_name"
-                      placeholder=""
-                      label="Business name"
-                      value={values.business_name}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      errors={errors}
-                      touched={touched}
-                    />
-
-                    <InputField
-                      name="business_email"
-                      type="email"
-                      id="business_email"
-                      placeholder=""
-                      label="Business Email Address"
-                      value={values.business_email}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      errors={errors}
-                      touched={touched}
-                    />
-
-                    <InputField
-                      name="business_phone"
-                      type="text"
-                      id="business_phone"
-                      placeholder=""
-                      label="Business Phone Number"
-                      value={values.business_phone}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      errors={errors}
-                      touched={touched}
-                    />
-
-                    <Select
-                      label="Business Category"
-                      options={["Category A", "Category B"]}
-                      disabledValue={" "}
-                      name="business_category"
-                      id="business_category"
-                      value={values.business_category}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      errors={errors}
-                      touched={touched}
-                    />
-
-                    <InputField
-                      name="account_no"
-                      type="text"
-                      id="account_no"
-                      placeholder=""
-                      label="Account No"
-                      value={values.account_no}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      errors={errors}
-                      touched={touched}
-                    />
-
-                    <div className="app__login_form__password">
+            <div>
+              <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit}
+              >
+                {(props) => {
+                  const {
+                    values,
+                    handleChange,
+                    handleBlur,
+                    handleSubmit,
+                    errors,
+                    touched,
+                  } = props;
+                  return (
+                    <form
+                      className="app__login_form gap-3"
+                      onSubmit={handleSubmit}
+                    >
                       <InputField
-                        name="password"
-                        id="password"
-                        type="password"
-                        placeholder="Enter your password"
-                        label="Password"
+                        name="business_name"
+                        type="text"
+                        id="business_name"
+                        placeholder=""
+                        label="Business name"
+                        value={values.business_name}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         errors={errors}
                         touched={touched}
                       />
 
-                      <div className="app__form__field ">
-                        <label>Image (Logo)</label>
-                        <FileDrop
-                          onDrop={(files) => {
-                            if (files === null) return;
-                            const currentFile = files[0];
-                            if (currentFile.size > MAX_FILE_SIZE) {
-                              toast.error("File size exceeds the limit (10MB)");
-                            } else {
-                              setFile(files[0]);
-                            }
-                          }}
-                          onTargetClick={onTargetClick}
-                        >
-                          <div className="app__auth__file__drop">
-                            <div className="d-flex justify-content-center">
-                              <Cloud />
-                            </div>
-                            <h4 className="text-center app__auth__file__drop__text mt-2 mb-3">
-                              Drag here or click the button below to upload
-                            </h4>
+                      <InputField
+                        name="business_email"
+                        type="email"
+                        id="business_email"
+                        placeholder=""
+                        label="Business Email Address"
+                        value={values.business_email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        errors={errors}
+                        touched={touched}
+                      />
 
-                            <div className="d-flex justify-content-center align-items-center">
-                              <div className="d-flex align-items-center">
-                                <Button
-                                  className="d-flex gap-2 align-items-center app__auth__attach_btn"
-                                  type="button"
-                                >
-                                  <Attach />
-                                  Choose file
-                                </Button>
+                      <InputField
+                        name="business_phone"
+                        type="text"
+                        id="business_phone"
+                        placeholder=""
+                        label="Business Phone Number"
+                        value={values.business_phone}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        errors={errors}
+                        touched={touched}
+                      />
+
+                      <Select
+                        label="Business Category"
+                        options={["Category A", "Category B"]}
+                        disabledValue={" "}
+                        name="business_category"
+                        id="business_category"
+                        value={values.business_category}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        errors={errors}
+                        touched={touched}
+                      />
+
+                      <InputField
+                        name="account_no"
+                        type="text"
+                        id="account_no"
+                        placeholder=""
+                        label="Account No"
+                        value={values.account_no}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        errors={errors}
+                        touched={touched}
+                      />
+
+                      <div className="app__login_form__password">
+                        <div className="app__form__field ">
+                          <label>Image (Logo)</label>
+                          <FileDrop
+                            onDrop={(files) => {
+                              if (files === null) return;
+                              const currentFile = files[0];
+                              if (currentFile.size > MAX_FILE_SIZE) {
+                                toast.error("File size exceeds the limit (10MB)");
+                              } else {
+                                setFile(files[0]);
+                              }
+                            }}
+                            onTargetClick={onTargetClick}
+                          >
+                            <div className="app__auth__file__drop">
+                              <div className="d-flex justify-content-center">
+                                <Cloud />
                               </div>
+                              <h4 className="text-center app__auth__file__drop__text mt-2 mb-3">
+                                Drag here or click the button below to upload
+                              </h4>
+
+                              <div className="d-flex justify-content-center align-items-center">
+                                <div className="d-flex align-items-center">
+                                  <Button
+                                    className="d-flex gap-2 align-items-center app__auth__attach_btn"
+                                    type="button"
+                                  >
+                                    <Attach />
+                                    Choose file
+                                  </Button>
+                                </div>
+                              </div>
+
+                              <RenderIf condition={file !== null}>
+                                <p className="text-center app__auth__file__drop__text lg mt-3">
+                                  {file?.name}
+                                </p>
+                              </RenderIf>
+
+                              <RenderIf condition={file === null}>
+                                <p className="text-center app__auth__file__drop__text lg mt-3">
+                                  Maximum upload size: 10MB (.jpg)
+                                </p>
+                              </RenderIf>
                             </div>
-
-                            <RenderIf condition={file !== null}>
-                              <p className="text-center app__auth__file__drop__text lg mt-3">
-                                {file?.name}
-                              </p>
-                            </RenderIf>
-
-                            <RenderIf condition={file === null}>
-                              <p className="text-center app__auth__file__drop__text lg mt-3">
-                                Maximum upload size: 10MB (.jpg)
-                              </p>
-                            </RenderIf>
-                          </div>
-                        </FileDrop>
-                        <input
-                          onChange={onFileInputChange}
-                          ref={fileInputRef}
-                          type="file"
-                          className="hidden d-none"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="d-flex app__auth__sign__uo__btn align-items-center gap-3">
-                      <div className="">
-                        <Button title="Next" className="px-4" type="submit" />
-                      </div>
-                      <p>Step 1 of 2</p>
-                    </div>
-                  </form>
-                );
-              }}
-            </Formik>
-          </div>
-        </RenderIf>
-
-        <RenderIf condition={!firstPageActive}>
-          <p className="app__auth_subtitle font-inter mb-3">Business Address</p>
-
-          <div>
-            <Formik
-              initialValues={initialValues2}
-              validationSchema={validationSchema2}
-              onSubmit={onSubmit2}
-            >
-              {(props) => {
-                const {
-                  values,
-                  handleChange,
-                  handleBlur,
-                  handleSubmit,
-                  errors,
-                  touched,
-                } = props;
-                return (
-                  <form
-                    className="app__login_form gap-3"
-                    onSubmit={handleSubmit}
-                  >
-                    <div className="d-flex align-items-start gap-3">
-                      <div className="w-100">
-                        <InputField
-                          name="house_number"
-                          type="text"
-                          id="house_number"
-                          placeholder=""
-                          label="House Number"
-                          value={values.house_number}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          errors={errors}
-                          touched={touched}
-                        />
+                          </FileDrop>
+                          <input
+                            onChange={onFileInputChange}
+                            ref={fileInputRef}
+                            type="file"
+                            className="hidden d-none"
+                          />
+                        </div>
                       </div>
 
-                      <div className="w-100">
-                        <InputField
-                          name="street"
-                          type="text"
-                          id="street"
-                          placeholder=""
-                          label="Street"
-                          value={values.street}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          errors={errors}
-                          touched={touched}
-                        />
+                      <div className="d-flex app__auth__sign__uo__btn align-items-center gap-3">
+                        <div className="">
+                          <Button title="Next" className="px-4" type="submit" />
+                        </div>
+                        <p>Step 1 of 2</p>
                       </div>
-                    </div>
+                    </form>
+                  );
+                }}
+              </Formik>
+            </div>
+          </RenderIf>
 
-                    <div className="d-flex align-items-start gap-3">
-                      <div className="w-100 pt-1">
-                        <InputField
-                          name="city"
-                          type="text"
-                          id="city"
-                          placeholder=""
-                          label="City"
-                          value={values.city}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          errors={errors}
-                          touched={touched}
-                        />
+          <RenderIf condition={!firstPageActive}>
+            <p className="app__auth_subtitle font-inter mb-3">Business Address</p>
+
+            <div>
+              <Formik
+                initialValues={initialValues2}
+                validationSchema={validationSchema2}
+                onSubmit={onSubmit2}
+              >
+                {(props) => {
+                  const {
+                    values,
+                    handleChange,
+                    handleBlur,
+                    handleSubmit,
+                    errors,
+                    touched,
+                  } = props;
+                  return (
+                    <form
+                      className="app__login_form gap-3"
+                      onSubmit={handleSubmit}
+                    >
+                      <div className="d-flex align-items-start gap-3">
+                        <div className="w-100">
+                          <InputField
+                            name="house_number"
+                            type="text"
+                            id="house_number"
+                            placeholder=""
+                            label="House Number"
+                            value={values.house_number}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            errors={errors}
+                            touched={touched}
+                          />
+                        </div>
+
+                        <div className="w-100">
+                          <InputField
+                            name="street"
+                            type="text"
+                            id="street"
+                            placeholder=""
+                            label="Street"
+                            value={values.street}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            errors={errors}
+                            touched={touched}
+                          />
+                        </div>
                       </div>
 
-                      <div className="w-100">
-                        <Select
-                          label="State"
-                          options={["Oyo", "Ogun"]}
-                          disabledValue={" "}
-                          name="state"
-                          id="state"
-                          value={values.state}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          errors={errors}
-                          touched={touched}
-                        />
+                      <div className="d-flex align-items-start gap-3">
+                        <div className="w-100 pt-1">
+                          <InputField
+                            name="city"
+                            type="text"
+                            id="city"
+                            placeholder=""
+                            label="City"
+                            value={values.city}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            errors={errors}
+                            touched={touched}
+                          />
+                        </div>
+
+                        <div className="w-100">
+                          <Select
+                            label="State"
+                            options={["Oyo", "Ogun"]}
+                            disabledValue={" "}
+                            name="state"
+                            id="state"
+                            value={values.state}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            errors={errors}
+                            touched={touched}
+                          />
+                        </div>
                       </div>
-                    </div>
 
-                    <p className="app__auth_subtitle font-inter">
-                      Contact Person Information
-                    </p>
+                      <p className="app__auth_subtitle font-inter">
+                        Contact Person Information
+                      </p>
 
-                    <InputField
-                      name="contact_name"
-                      type="text"
-                      id="contact_name"
-                      placeholder=""
-                      label="Contact Name"
-                      value={values.contact_name}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      errors={errors}
-                      touched={touched}
-                    />
-
-                    <InputField
-                      name="contact_phone"
-                      type="text"
-                      id="contact_phone"
-                      placeholder=""
-                      label="Contact Phone Number"
-                      value={values.contact_phone}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      errors={errors}
-                      touched={touched}
-                    />
-
-                    <InputField
-                      name="contact_email"
-                      type="text"
-                      id="contact_email"
-                      placeholder=""
-                      label="Contact Email Address"
-                      value={values.contact_email}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      errors={errors}
-                      touched={touched}
-                    />
-
-                    <p className="app__auth_subtitle font-inter">Password</p>
-                    <div className="app__login_form__password">
                       <InputField
-                        name="password"
-                        id="password"
-                        type="password"
+                        name="contact_name"
+                        type="text"
+                        id="contact_name"
                         placeholder=""
-                        label="Password"
-                        value={values.password}
+                        label="Contact Name"
+                        value={values.contact_name}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         errors={errors}
@@ -426,32 +377,78 @@ export default function Page() {
                       />
 
                       <InputField
-                        name="confirmPassword"
-                        id="confirmPassword"
-                        type="password"
+                        name="contact_phone"
+                        type="text"
+                        id="contact_phone"
                         placeholder=""
-                        label="Confirm Password"
-                        value={values.confirmPassword}
+                        label="Contact Phone Number"
+                        value={values.contact_phone}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         errors={errors}
                         touched={touched}
                       />
-                    </div>
 
-                    <div className="d-flex app__auth__sign__uo__btn align-items-center gap-3">
-                      <div className="">
-                        <Button title="Submit" className="px-4" type="submit" />
+                      <InputField
+                        name="contact_email"
+                        type="text"
+                        id="contact_email"
+                        placeholder=""
+                        label="Contact Email Address"
+                        value={values.contact_email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        errors={errors}
+                        touched={touched}
+                      />
+
+                      <p className="app__auth_subtitle font-inter">Password</p>
+                      <div className="app__login_form__password">
+                        <InputField
+                          name="password"
+                          id="password"
+                          type="password"
+                          placeholder=""
+                          label="Password"
+                          value={values.password}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          errors={errors}
+                          touched={touched}
+                        />
+
+                        <InputField
+                          name="confirmPassword"
+                          id="confirmPassword"
+                          type="password"
+                          placeholder=""
+                          label="Confirm Password"
+                          value={values.confirmPassword}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          errors={errors}
+                          touched={touched}
+                        />
                       </div>
-                      <p>Step 2 of 2</p>
-                    </div>
-                  </form>
-                );
-              }}
-            </Formik>
-          </div>
+
+                      <div className="d-flex app__auth__sign__uo__btn align-items-center gap-3">
+                        <div className="">
+                          <Button title="Submit" className="px-4 d-flex justify-content-center align-items-center" type="submit" isLoading={isLoading} />
+                        </div>
+                        <p>Step 2 of 2</p>
+                      </div>
+                    </form>
+                  );
+                }}
+              </Formik>
+            </div>
+          </RenderIf>
+        </div>
+      </RenderIf>
+
+        <RenderIf condition={status === 'success' || status === 'error'}>
+          <PendingModal />
         </RenderIf>
-      </div>
     </AuthLayout>
   );
 }

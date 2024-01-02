@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { RenderIf } from '..';
+import { Eye, EyeOff } from '../svg';
 
 interface IProps extends React.HTMLProps<HTMLInputElement> {
   type?: React.HTMLInputTypeAttribute;
@@ -21,6 +22,8 @@ const InputField = (props: IProps) => {
 
   const hasError = (errors[name] && touched[name]) || false;
 
+  const [show, setShow] = useState(false);
+
   return (
     <div className={`app__form__field ${hasError ? 'has_error' : ''} ${className || ''}`}>
       <div className="d-flex flex-column">
@@ -28,7 +31,15 @@ const InputField = (props: IProps) => {
           <label htmlFor={id}>{label}</label>
         </RenderIf>
 
-        <input {...{ ...restProps, id, name }} />
+        <div className='position-relative'>
+          <input {...{ ...restProps, type: show ? 'text' : restProps.type, id, name }} />
+
+          {restProps.type === 'password' && (
+            <span onClick={() => setShow((prev) => !prev)} className="cursor-pointer eye-icon">
+              {show ? <Eye /> : <EyeOff />}
+            </span>
+          )}
+        </div>
       </div>
       <RenderIf condition={hasError}>
         <div>

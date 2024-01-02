@@ -683,6 +683,35 @@ h6 {
   color: #f00;
 }
 
+.app__auth__pending__modal {
+  max-width: 442px;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.app__auth__pending__modal__icon {
+  padding: 19px;
+  border-radius: 6px;
+  background: rgba(255, 153, 0, 0.10);
+}
+
+.app__auth__pending__modal__icon__text {
+  color: #F90;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 142.2%; 
+}
+
+.app__auth__pending__modal__details {
+  color: #1A1619;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 128%; 
+}
+
 /* ===================================
     DASHBOARD ENDS HERE
 ====================================== */
