@@ -5,8 +5,10 @@ import {
   InputField,
   Select,
 } from "../../components/form control";
-
-import stub from "../../stub.json";
+import queries from "../../services/queries/verifiers";
+import { useSearchParams } from "react-router-dom";
+import { useMemo } from "react";
+import config from "../../config";
 
 enum Verifiers {
   Active = "1",
@@ -53,9 +55,9 @@ function PlusIcon() {
       <path
         d="M12 5V19M5 12H19"
         stroke="white"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -73,23 +75,47 @@ function Ellipsis() {
       <path
         d="M5 10.5C3.9 10.5 3 11.4 3 12.5C3 13.6 3.9 14.5 5 14.5C6.1 14.5 7 13.6 7 12.5C7 11.4 6.1 10.5 5 10.5Z"
         stroke="#333333"
-        stroke-width="1.5"
+        strokeWidth="1.5"
       />
       <path
         d="M19 10.5C17.9 10.5 17 11.4 17 12.5C17 13.6 17.9 14.5 19 14.5C20.1 14.5 21 13.6 21 12.5C21 11.4 20.1 10.5 19 10.5Z"
         stroke="#333333"
-        stroke-width="1.5"
+        strokeWidth="1.5"
       />
       <path
         d="M12 10.5C10.9 10.5 10 11.4 10 12.5C10 13.6 10.9 14.5 12 14.5C13.1 14.5 14 13.6 14 12.5C14 11.4 13.1 10.5 12 10.5Z"
         stroke="#333333"
-        stroke-width="1.5"
+        strokeWidth="1.5"
       />
     </svg>
   );
 }
 
+export enum SearchParams {
+  status = 'status',
+  searchParams = 'searchParams',
+  pageNumber = 'pageNumber',
+  pageSize = 'pageSize',
+}
+
+export const useSearchQueries = () => {
+  const [searchParams] = useSearchParams();
+
+  return useMemo(() => ({
+    status: searchParams.get(SearchParams.status) || undefined,
+    searchParams: searchParams.get(SearchParams.searchParams) || undefined,
+    pageNumber: searchParams.get(SearchParams.pageNumber) || config.queryArgs.pageNumber,
+    pageSize: searchParams.get(SearchParams.pageSize) || config.queryArgs.pageSize,
+  }), [searchParams])
+};
+
 export default function Page() {
+  const [, setSearchParams] = useSearchParams();
+
+  const query = useSearchQueries();
+
+  const { data, isLoading } = queries.read({ query });
+
   return (
     <DashboardLayout>
       <div className="wema__dshboard__filters">
@@ -98,13 +124,28 @@ export default function Page() {
           options={options}
           optionLabel="label"
           optionValue="value"
-          value=""
+          onChange={(e) => {
+            setSearchParams((params) => {
+              params.set(SearchParams.status, (e.target as any).value || '');
+
+              return params;
+            })
+          }}
+          value={query.status || ''}
         />
 
         <div className="wema__dshboard__filters__right">
           <InputField
             className="wema__dshboard__filters__input"
             placeholder="Name/Phone no / Location"
+            onChange={(e) => {
+              setSearchParams((params) => {
+                params.set(SearchParams.searchParams, (e.target as any).value || '');
+  
+                return params;
+              })
+            }}
+            value={query.searchParams || ''}
           />
 
           <Button>
@@ -132,7 +173,7 @@ export default function Page() {
           </thead>
 
           <tbody>
-            {stub.map((item) => (
+            {data?.map((item) => (
               <tr key={item.id}>
                 <td className="align-middle">
                   <Checkbox checked={false} onChange={() => {}} />
@@ -152,6 +193,22 @@ export default function Page() {
                 </td>
               </tr>
             ))}
+
+            {!data?.length && !isLoading && (
+              <tr>
+                <td className="align-middle" colSpan={8}>
+                  No record available
+                </td>
+              </tr>
+            )}
+
+            {!data?.length && isLoading && (
+              <tr>
+                <td className="align-middle" colSpan={8}>
+                  Fetching data...
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
 

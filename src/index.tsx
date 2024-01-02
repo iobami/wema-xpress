@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./css/bootstrap.min.css";
@@ -14,7 +15,6 @@ import "./css/responsive.css";
 
 import reportWebVitals from "./reportWebVitals";
 import { router } from "./navigation";
-import { QueryClient, QueryClientProvider } from "react-query";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

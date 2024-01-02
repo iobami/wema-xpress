@@ -16,9 +16,15 @@ export const routes = {
   },
   dashboard: {
     path: '/dashboard',
+
+    entry: {
+      path: '/dashboard/verifiers'
+    },
+
     deals: {
       path: '/dashboard/deals'
     },
+
     transactions: {
       path: '/dashboard/transactions'
     },

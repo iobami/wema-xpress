@@ -8,12 +8,12 @@ const theme = {
 
 const dev = {
   feUrl: 'http://localhost:3000',
-  baseUrl: 'https://mock.com/api/v1',
+  baseUrl: '', // https://mock.com/api/v1
 };
 
 const staging = {
   feUrl: 'https://wema-xpress.vercel.app',
-  baseUrl: 'https://mock.com/api/v1',
+  baseUrl: '', // https://mock.com/api/v1
 };
 
 const environments = { dev, staging };
@@ -24,7 +24,7 @@ const nextEnv = (process.env.NEXT_PUBLIC_ENV || 'dev') as NextEnv;
 const queryArgs = {
   searchParams: '',
   pageNumber: 1,
-  pageSize: 8,
+  pageSize: 10,
 };
 
 const config = {
