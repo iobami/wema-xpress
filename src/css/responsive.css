@@ -20,6 +20,10 @@
 
 /* col-xl */
 @media (max-width: 1199.98px) {
+  .app__auth__header {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
 }
 
 /* col-lg */
@@ -68,6 +72,18 @@
   .app__document__archiver--header .row {
     grid-column-gap: 0rem;
     /* grid-row-gap: 3rem; */
+  }
+
+  .wema__dashboard__sidebar {
+    display: none;
+  }
+
+  .wema__dashboard__header {
+    left: 0;
+  }
+
+  .wema__dashboard__layout__main__content {
+    margin-left: 0;
   }
 }
 
@@ -126,7 +142,7 @@
   }
 
   .app__auth__form_container {
-    width: 85%;
+    width: calc(100% - (24px * 2));
     padding: 32px;
   }
 
@@ -150,6 +166,10 @@
   .app__breakdown__card {
     padding: 2rem 1rem;
   }
+
+  .app__auth__header__text {
+    display: none;
+  }
 }
 
 @media (max-width: 450.98px) {
@@ -159,7 +179,6 @@
   }
 
   .app__auth__form_container {
-    width: 91%;
     padding: 22px;
   }
 

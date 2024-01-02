@@ -50,7 +50,7 @@ export default function Layout({ children }: IProps) {
       </div>
       {/* position fixed header here? */}
 
-      <div className="py-4">{children}</div>
+      <div className="app__auth__main py-4">{children}</div>
     </main>
   );
 }

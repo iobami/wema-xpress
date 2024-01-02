@@ -87,6 +87,12 @@ body {
   padding-top: 100px;
 }
 
+.app__auth__main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .app__auth__p {
   font-family: "Montserrat";
   font-style: normal;
@@ -509,6 +515,7 @@ h6 {
 .wema__dshboard__filters {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   margin-bottom: 32px;
 }
 
@@ -554,6 +561,7 @@ h6 {
 
 .wema__dshboard__table table {
   background-color: #fff;
+  min-width: 991px;
 }
 
 .wema__dshboard__table th {
