@@ -12,7 +12,7 @@ interface IProps {
 export default function Layout({ children }: IProps) {
   const location = useLocation();
 
-  const isSignin = location.pathname === routes.signIn.path;
+  const isSignin = location.pathname !== routes.signUp.path;
 
   return (
     <main className="app__auth">

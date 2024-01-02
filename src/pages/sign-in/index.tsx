@@ -2,6 +2,7 @@ import { Button, InputField } from "../../components/form control";
 import { AuthLayout } from "../../layouts";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import queries from "../../services/queries/auth";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -15,12 +16,8 @@ const initialValues = {
   password: "",
 };
 
-type InitialValues = ReturnType<() => typeof initialValues>;
-
 export default function Page() {
-  const onSubmit = (_values: InitialValues) => {
-    console.log(_values);
-  };
+  const { mutate, isLoading } = queries.login();
 
   return (
     <AuthLayout>
@@ -37,7 +34,7 @@ export default function Page() {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-            onSubmit={onSubmit}
+            onSubmit={mutate}
           >
             {(props) => {
               const {
@@ -82,7 +79,7 @@ export default function Page() {
                     </p>
                   </div>
 
-                  <Button title="Sign in" type="submit" />
+                  <Button isLoading={isLoading} title="Sign in" type="submit" />
                 </form>
               );
             }}

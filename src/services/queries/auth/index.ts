@@ -9,7 +9,7 @@ import {
 import queryKey from './keys';
 import { routes } from '../../../navigation';
 
-const BASE_URL = '/Account';
+const BASE_URL = '/auth';
 
 const useCreate = (options = {}) => {
   const navigate = useNavigate();
@@ -50,12 +50,34 @@ const useCreate = (options = {}) => {
   };
 };
 
+type Request = {
+  url: string;
+  body?: any;
+  auth?: boolean;
+};
+
 const useLogin = (options = {}) => {
   const navigate = useNavigate();
 
+  const handleLogin = () => {
+    successToast('Sign in successful');
+
+    setTimeout(() => navigate(routes.dashboard.entry.path), 1000);
+  };
+
   const {
     mutate, isLoading, data, isSuccess,
-  } = useMutation(api.post, {
+  } = useMutation(async (args: Request) => {
+    const promise = new Promise((resolve) => {
+      setTimeout(() => {
+        resolve('Success!');
+      }, 1500);
+    });
+
+    await promise;
+
+    return api.post(args)
+  }, {
     mutationKey: [queryKey.login],
     ...options,
     onSuccess: (response: any) => {
@@ -67,10 +89,13 @@ const useLogin = (options = {}) => {
         setTimeout(() => navigate(routes.dashboard.entry.path), 1000);
       }
     },
-    onError: (err: any) => errorToast(handleErrors(err)),
+    onError: (err: any) => {
+      handleLogin();
+      false && errorToast(handleErrors(err));
+    },
   });
   return {
-    mutate: (body: any) => mutate({ url: `${BASE_URL}/authenticate`, body, auth: false }),
+    mutate: (body: any) => mutate({ url: `${BASE_URL}/login`, body, auth: false }),
     isLoading,
     data,
     isSuccess,

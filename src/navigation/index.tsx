@@ -21,6 +21,10 @@ export const routes = {
       path: '/dashboard/verifiers'
     },
 
+    verifiers: {
+      path: '/dashboard/verifiers'
+    },
+
     deals: {
       path: '/dashboard/deals'
     },
@@ -45,7 +49,7 @@ export const router = createBrowserRouter([
     element: <SignUp />,
   },
   {
-    path: routes.dashboard.path,
+    path: routes.dashboard.entry.path,
     element: <Dashboard />,
   },
 ]);

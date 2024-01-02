@@ -10,6 +10,10 @@ import { useSearchParams } from "react-router-dom";
 import { useMemo } from "react";
 import config from "../../config";
 
+function paginate(array: any[], page_size = 10, page_number = 1) {
+  return array.slice((page_number - 1) * page_size, page_number * page_size);
+}
+
 enum Verifiers {
   Active = "1",
   Pending = "2",
@@ -116,6 +120,8 @@ export default function Page() {
 
   const { data, isLoading } = queries.read({ query });
 
+  const slicedData = paginate(data, Number(query.pageSize), Number(query.pageNumber));
+
   return (
     <DashboardLayout>
       <div className="wema__dshboard__filters">
@@ -173,7 +179,7 @@ export default function Page() {
           </thead>
 
           <tbody>
-            {data?.map((item) => (
+            {slicedData?.map((item) => (
               <tr key={item.id}>
                 <td className="align-middle">
                   <Checkbox checked={false} onChange={() => {}} />
@@ -194,7 +200,7 @@ export default function Page() {
               </tr>
             ))}
 
-            {!data?.length && !isLoading && (
+            {!slicedData?.length && !isLoading && (
               <tr>
                 <td className="align-middle" colSpan={8}>
                   No record available
@@ -202,7 +208,7 @@ export default function Page() {
               </tr>
             )}
 
-            {!data?.length && isLoading && (
+            {!slicedData?.length && isLoading && (
               <tr>
                 <td className="align-middle" colSpan={8}>
                   Fetching data...
@@ -213,8 +219,24 @@ export default function Page() {
         </table>
 
         <div className="wema__dshboard__table__pagination">
-          <div className="size">
+          <div className="wema__dshboard__table__pagination__size">
             <p>Rows per page</p>
+
+            <Select
+              className="wema__dshboard__table__pagination__select"
+              options={['10']}
+            />
+          </div>
+
+          <div className="wema__dshboard__table__pagination__ctrl">
+            <button className="btn btn-sm btn-light disabled">Previous</button>
+
+            <div className="wema__dshboard__table__pagination__ctrl__nos">
+              <button className="btn btn-sm btn-light active">1</button>
+              <button className="btn btn-sm btn-light">2</button>
+            </div>
+
+            <button className="btn btn-sm btn-light">Next</button>
           </div>
         </div>
       </div>

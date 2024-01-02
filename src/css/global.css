@@ -600,6 +600,52 @@ h6 {
 .wema__dshboard__table__pagination {
   background-color: #fff;
   padding: 24px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wema__dshboard__table__pagination__size {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wema__dshboard__table__pagination__size p {
+  color: #808080;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.wema__dshboard__table__pagination__select {
+  max-width: 90px;
+}
+
+.wema__dshboard__table__pagination__ctrl {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.wema__dshboard__table__pagination__ctrl > button {
+  color: #039bf0;
+}
+
+.wema__dshboard__table__pagination__ctrl .disabled {
+  color: #808080;
+}
+
+.wema__dshboard__table__pagination__ctrl__nos {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wema__dshboard__table__pagination__ctrl__nos .active {
+  color: #039bf0;
 }
 
 .form-check-input:checked[type="checkbox"] {

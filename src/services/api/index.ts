@@ -19,11 +19,8 @@ const get = async ({ url, auth = true }: Request) => {
 };
 
 const post = async ({ url, body, auth = true }: Request) => {
-  const isLogin = url === '/Account/authenticate';
   const options = {
-    headers: {
-      path: isLogin && 'login',
-    },
+    headers: {},
   };
   // eslint-disable-next-line max-len
   return (await (auth ? axiosInstance.post(url, body) : axios.post(baseUrl + url, body, options))).data;

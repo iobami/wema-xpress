@@ -9,7 +9,7 @@ export default function Sidebar() {
   const location = useLocation()
 
   const sidebarLinks = [
-    {id: 1, label: 'Verifiers', route: routes.dashboard.path, icon: Verifiers},
+    {id: 1, label: 'Verifiers', route: routes.dashboard.verifiers.path, icon: Verifiers},
     {id: 2, label: 'Deals', route: routes.dashboard.deals.path, icon: Deals},
     {id: 3, label: 'Transactions', route: routes.dashboard.transactions.path, icon: Transactions},
   ]
